@@ -12,3 +12,9 @@ class TaskSerializerForCreate(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('description', )
+
+
+class TaskSerializerForUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ('pk', 'description')
