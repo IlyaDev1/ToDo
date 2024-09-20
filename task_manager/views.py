@@ -9,17 +9,9 @@ class TaskBaseAPIView(generics.GenericAPIView):
     serializer_class = TaskSerializer
 
 
-class TaskCreateAPIView(TaskBaseAPIView, generics.CreateAPIView):
+class TaskListCreateAPIView(TaskBaseAPIView, generics.ListCreateAPIView):
     pass
 
 
-class TaskListAPIView(TaskBaseAPIView, generics.ListAPIView):
-    pass
-
-
-class TaskUpdateAPIView(TaskBaseAPIView, generics.UpdateAPIView):
-    pass
-
-
-class TaskDeleteAPIView(TaskBaseAPIView, generics.DestroyAPIView):
+class TaskDetailAPIView(TaskBaseAPIView, generics.RetrieveUpdateDestroyAPIView):
     pass
