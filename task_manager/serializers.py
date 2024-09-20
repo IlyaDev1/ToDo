@@ -5,16 +5,10 @@ from .models import Task
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('created_at', 'description')
+        fields = '__all__'
+        read_only_fields = ('created_at',)
 
-
-class TaskSerializerForCreate(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = ('description', )
-
-
-class TaskSerializerForUpdate(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = ('pk', 'description')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.context['request'].method in ['POST', 'PUT']:
+            self.fields.pop('created_at')

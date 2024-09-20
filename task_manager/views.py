@@ -1,23 +1,25 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Task
-from .serializers import TaskSerializerForCreate, TaskSerializer, TaskSerializerForUpdate
+from .serializers import TaskSerializer
 
 
-class TaskCreateAPIView(generics.CreateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializerForCreate
-
-
-class TaskListAPIView(generics.ListAPIView):
+class TaskBaseAPIView(generics.GenericAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
 
-class TaskUpdateAPIView(generics.UpdateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializerForUpdate
+class TaskCreateAPIView(TaskBaseAPIView, generics.CreateAPIView):
+    pass
 
 
-class TaskDeleteAPIView(generics.DestroyAPIView):
-    queryset = Task.objects.all()
+class TaskListAPIView(TaskBaseAPIView, generics.ListAPIView):
+    pass
+
+
+class TaskUpdateAPIView(TaskBaseAPIView, generics.UpdateAPIView):
+    pass
+
+
+class TaskDeleteAPIView(TaskBaseAPIView, generics.DestroyAPIView):
+    pass
