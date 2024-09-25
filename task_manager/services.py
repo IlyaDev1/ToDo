@@ -8,21 +8,11 @@ from .models import Task
 
 
 class TaskService:
-    @staticmethod
-    def get_all_tasks() -> list[QuerySet]:
-        return Task.objects.all()
+    def __init__(self):
+        self.task_repository: TaskRepository = TaskSqliteRepository()
 
-    @staticmethod
-    def get_task_serializer() -> Type[TaskSerializer]:
+    def get_tasks(self) -> QuerySet:
+        return self.task_repository.get_all_tasks()
+
+    def get_task_serializer(self) -> Type[TaskSerializer]:
         return TaskSerializer
-
-
-# class TaskService:
-#     def __init__(self):
-#         self.task_repository: TaskRepository = TaskSqliteRepository()
-#
-#     def get_tasks(self) -> list[QuerySet]:
-#         return self.task_repository.get_all_tasks()
-#
-#     def task_serialize(self) -> Type[TaskSerializer]:
-#         return TaskSerializer
