@@ -4,5 +4,5 @@ from .models import Task
 
 
 class TaskSqliteRepository(TaskRepository):
-    def get_all_tasks(self) -> list[QuerySet]:
+    def get_all_tasks(self) -> QuerySet:
         return Task.objects.all()
