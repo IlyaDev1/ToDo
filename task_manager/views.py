@@ -2,11 +2,17 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Task
 from .serializers import TaskSerializer
+from .services import TaskService
 
 
 class TaskBaseAPIView(generics.GenericAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+    task_service = TaskService()
+
+    def get_queryset(self):
+        return self.task_service.get_tasks()
+
+    def get_serializers_class(self):
+        return self.task_service.get_task_serializer()
 
 
 class TaskListCreateAPIView(TaskBaseAPIView, generics.ListCreateAPIView):
