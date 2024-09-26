@@ -11,7 +11,7 @@ class TaskBaseAPIView(generics.GenericAPIView):
     def get_queryset(self):
         return self.task_service.get_tasks()
 
-    def get_serializers_class(self):
+    def get_serializer_class(self):
         return self.task_service.get_task_serializer()
 
 
