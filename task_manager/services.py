@@ -8,11 +8,15 @@ from .models import Task
 
 
 class TaskService:
-    def __init__(self):
+    def __init__(self, is_today: bool):
+        self.is_today = is_today
         self.task_repository: TaskRepository = TaskSqliteRepository()
 
     def get_tasks(self) -> QuerySet:
-        return self.task_repository.get_all_tasks()
+        if self.is_today:
+            return self.task_repository.get_today_tasks()
+        else:
+            return self.task_repository.get_all_tasks()
 
     def get_task_serializer(self) -> Type[TaskSerializer]:
         return TaskSerializer
