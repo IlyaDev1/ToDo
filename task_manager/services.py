@@ -8,12 +8,11 @@ from .models import Task
 
 
 class TaskService:
-    def __init__(self, is_today: bool):
-        self.is_today = is_today
+    def __init__(self):
         self.task_repository: TaskRepository = TaskSqliteRepository()
 
-    def get_tasks(self) -> QuerySet:
-        if self.is_today:
+    def get_tasks(self, is_today: bool) -> QuerySet:
+        if is_today:
             return self.task_repository.get_today_tasks()
         else:
             return self.task_repository.get_all_tasks()
