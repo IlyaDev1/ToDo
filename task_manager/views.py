@@ -6,15 +6,13 @@ from .services import TaskService
 
 
 class TaskBaseAPIView(generics.GenericAPIView):
-    task_service: TaskService = None
+    task_service: TaskService = TaskService()
 
     def get_queryset(self):
         if self.request.GET.get('today') == '1':
-            self.task_service = TaskService(is_today=True)
+            return self.task_service.get_tasks(is_today=True)
         else:
-            self.task_service = TaskService(is_today=False)
-
-        return self.task_service.get_tasks()
+            return self.task_service.get_tasks(is_today=False)
 
     def get_serializer_class(self):
         return self.task_service.get_task_serializer()
