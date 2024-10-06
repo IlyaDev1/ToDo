@@ -13,8 +13,8 @@ class TaskService:
 
     def get_tasks(self, get_request: QueryDict) -> QuerySet:
         is_today = get_request.get('today')
-        tag = get_request.get('tag')
-        return self.task_repository.get_tasks(is_today=is_today, tag=tag)
+        tags = get_request.get('tag')
+        return self.task_repository.get_tasks(is_today=is_today, tags=tags)
 
     def get_task_serializer(self) -> Type[TaskSerializer]:
         return TaskSerializer
