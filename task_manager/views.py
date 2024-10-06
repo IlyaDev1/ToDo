@@ -9,10 +9,7 @@ class TaskBaseAPIView(generics.GenericAPIView):
     task_service: TaskService = TaskService()
 
     def get_queryset(self):
-        if self.request.GET.get('today') == '1':
-            return self.task_service.get_tasks(is_today=True)
-        else:
-            return self.task_service.get_tasks(is_today=False)
+        return self.task_service.get_tasks(self.request.GET)
 
     def get_serializer_class(self):
         return self.task_service.get_task_serializer()
