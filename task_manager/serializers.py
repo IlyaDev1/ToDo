@@ -1,8 +1,11 @@
 from rest_framework import serializers
+from taggit.serializers import (TagListSerializerField, TaggitSerializer)
 from .models import Task
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(TaggitSerializer, serializers.ModelSerializer):
+    tags = TagListSerializerField()
+
     class Meta:
         model = Task
         fields = '__all__'
