@@ -4,5 +4,5 @@ from django.db.models import QuerySet
 
 class TaskRepository(ABC):
     @abstractmethod
-    def get_tasks(self) -> QuerySet:
+    def get_tasks(self, *args, **kwargs) -> QuerySet:
         ...
